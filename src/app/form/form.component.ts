@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { UseExistingWebDriver } from 'protractor/built/driverProviders';
+import { User } from '../user';
 
 @Component({
   selector: 'app-form',
@@ -15,12 +17,16 @@ export class FormComponent implements OnInit {
   ngOnInit() {
     this.formGroup = this.formBuild.group({
       firstName: [''],
-      lastName: ['']
+      lastName: [''],
+      age: [''],
+      email: ['']
     })
   }
 
   onSubmit(form: FormGroup){
-    console.log(form);
+    const {firstName,lastName,age,email} = form.value;
+    const user = new User(firstName,lastName,age,email);
+    console.log(user);
   }
 
 }
